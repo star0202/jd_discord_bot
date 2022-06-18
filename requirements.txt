@@ -1,0 +1,6 @@
+requests~=2.28.0
+bs4~=0.0.1
+beautifulsoup4~=4.11.1
+py-cord @ git+https://github.com/Pycord-Development/pycord
+youtube-dl~=2021.12.17
+googletrans~=3.0.0
