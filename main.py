@@ -2,9 +2,9 @@ import discord
 from discord.ext import commands
 import time
 import os
-from config import token
+from auth import token
 
-bot = commands.Bot(command_prefix="/", help_command=None)
+bot = commands.Bot(command_prefix="/", intents = discord.Intents.all(), help_command=None)
 bot.start_time = time.time()
 
 
