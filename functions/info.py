@@ -20,7 +20,7 @@ class Info(commands.Cog):
         if user.color == discord.Colour.default():
             embed = discord.Embed(colour=color, title=user.display_name)
         else:
-            embed = discord.Embed(colour=user.color, title=user.display_name)
+            embed = discord.Embed(colour=user.color, title=user.name + "#" + user.discriminator)
         embed.set_thumbnail(url=user.display_avatar.url)
         embed.add_field(name="계정명", value=user.name + "#" + user.discriminator)
         embed.add_field(name="닉네임", value=user.display_name)
