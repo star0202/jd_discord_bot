@@ -3,9 +3,11 @@ from discord.ext import commands
 import time
 import os
 from auth import token
+import subprocess
 
 bot = commands.Bot(command_prefix="/", intents = discord.Intents.all(), help_command=None)
 bot.start_time = time.time()
+bot.githash = str(subprocess.check_output(["git", "describe", "--always"]).strip()).split("'")[1]
 
 
 @bot.event

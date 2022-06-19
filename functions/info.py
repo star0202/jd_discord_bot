@@ -7,7 +7,7 @@ from config import color
 
 
 class Info(commands.Cog):
-    @slash_command(name="유저정보", description="유저의 정보를 출력합니다.")
+    @slash_command(name="유저정보", description="유저의 정보를 전송합니다.")
     async def userinfo(
         self,
         ctx: ApplicationContext,
@@ -29,7 +29,7 @@ class Info(commands.Cog):
         embed.add_field(name="계정 생성 날짜", value=f"<t:{datetime_to_unix(user.created_at)}:R> ({user.created_at})")
         await ctx.respond(embed=embed)
 
-    @slash_command(name="서버정보", description="현재 서버의 정보를 출력합니다.")
+    @slash_command(name="서버정보", description="현재 서버의 정보를 전송합니다.")
     async def serverinfo(self, ctx: ApplicationContext):
         server = ctx.guild
         embed = discord.Embed(colour=color, title=server.name)
@@ -37,7 +37,6 @@ class Info(commands.Cog):
         embed.add_field(name="소유자", value=f"{server.owner.display_name}({str(server.owner)})")
         a = 0
         b = 0
-        await ctx.send(str(server.fetch_members(limit=150)))
         async for x in server.fetch_members():
             if x.bot:
                 b += 1
