@@ -36,11 +36,12 @@ class Manage(commands.Cog):
             m += 1
         embed = discord.Embed(title="봇 정보", color=color)
         embed.set_thumbnail(url=ctx.bot.user.avatar.url)
-        embed.add_field(name="봇 이름", value=f"{ctx.bot.user.name}")
+        embed.add_field(name="봇 이름", value=f"**{ctx.bot.user.name}** ({str(ctx.bot.user)})", inline=False)
         embed.add_field(
-            name="업타임", value=f"{d} 일 {h} 시간 {m} 분 {s} 초"
+            name="업타임", value=f"{d} 일 {h} 시간 {m} 분 {s} 초",
+            inline = False
         )
-        embed.add_field(name="봇 ID", value=str(ctx.bot.user.id))
+        embed.add_field(name="봇 ID", value=str(ctx.bot.user.id), inline=False)
         await ctx.respond(embed=embed)
 
 
