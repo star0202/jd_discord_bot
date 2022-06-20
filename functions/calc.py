@@ -85,7 +85,7 @@ class InteractiveView(discord.ui.View):
         try:
             self.expr = await self.calc.calculate(self.expr)
         except:
-            return await interaction.response.send_message("잘못된 계산이에요")
+            return await interaction.response.edit_message(content=f"```\n잘못된 계산이에요.\n```")
         await interaction.response.edit_message(content=f"```\n{self.expr}\n```")
 
     @discord.ui.button(style=discord.ButtonStyle.green, label="-", row=3)
@@ -115,7 +115,7 @@ class InteractiveView(discord.ui.View):
 
 
 class Calc(commands.Cog):
-    @slash_command()
+    @slash_command(name="계산", description="간단한 계산을 할 수 있는 계산기를 생성합니다.")
     async def calc(self, ctx: discord.ApplicationContext):
         view = InteractiveView()
         await ctx.respond("```\n```", view=view)
