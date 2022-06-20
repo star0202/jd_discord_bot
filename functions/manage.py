@@ -51,7 +51,6 @@ class Manage(commands.Cog):
     ):
         if ctx.author.guild_permissions.administrator:
             if count:
-                await asyncio.sleep(2)
                 await ctx.channel.purge(limit=count)
                 embed = discord.Embed(title="청소 완료!", color=color)
                 embed.add_field(name="삭제한 메시지의 수:", value=f"{count}", inline=False)
