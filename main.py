@@ -11,6 +11,7 @@ bot.start_time = time.time()
 
 @bot.event
 async def on_ready():
+    print("Log In")
     await bot.change_presence(
         status=discord.Status.online,
         activity=discord.Game(status),

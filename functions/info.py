@@ -26,6 +26,11 @@ class Info(commands.Cog):
         embed.add_field(name="닉네임", value=user.display_name)
         embed.add_field(name="ID", value=str(user.id))
         embed.add_field(name="최상위 역할", value=str(user.top_role))
+        if user.bot:
+            type_of_user = "봇"
+        else:
+            type_of_user = "유저"
+        embed.add_field(name="유형", value=type_of_user)
         embed.add_field(name="계정 생성 날짜", value=f"<t:{datetime_to_unix(user.created_at)}:R> ({user.created_at})")
         await ctx.respond(embed=embed)
 
