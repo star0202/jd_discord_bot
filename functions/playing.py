@@ -197,7 +197,7 @@ class TicTacToeButton(discord.ui.Button["TicTacToe"]):
 class TicTacToe(discord.ui.View):
     children: List[TicTacToeButton]
 
-    def __init__(self, player_id: discord.Member, rival_id: discord.Member):
+    def __init__(self, player_id: int, rival_id: int):
         super().__init__()
 
         self.player_ids = (player_id, rival_id)

@@ -6,8 +6,6 @@ __pycache__/
 # C extensions
 *.so
 
-auth.py
-
 # Distribution / packaging
 .Python
 build/
@@ -155,3 +153,4 @@ cython_debug/
 .idea/vcs.xml
 .idea/jd_discord_bot.iml
 config.py
+auth.py
