@@ -40,7 +40,7 @@ class Playing(commands.Cog):
             embed.add_field(name="**결과:**", value=f"{result}", inline=False)
             await ctx.respond(embed=embed)
 
-    @slash_command(name="주사위",description="주사위를 굴립니다.")
+    @slash_command(name="주사위", description="주사위를 굴립니다.")
     async def dice(
         self,
         ctx: ApplicationContext,
@@ -76,7 +76,7 @@ class Playing(commands.Cog):
                     inline=False,
                 )
                 await ctx.respond(embed=embed)
-        except:
+        except Exception:
             embed = discord.Embed(
                 title="오류 발생!", color=bad
             )
@@ -103,11 +103,11 @@ class Playing(commands.Cog):
         await msg.add_reaction("🔵")
         try:
 
-            def check(reaction, user):
+            def check(react, usr):
                 return (
-                    str(reaction) in ["🔴", "🔵"]
-                    and user == ctx.author
-                    and reaction.message.id == msg.id
+                        str(react) in ["🔴", "🔵"]
+                        and usr == ctx.author
+                        and react.message.id == msg.id
                 )
 
             reaction, user = await ctx.bot.wait_for("reaction_add", check=check)
