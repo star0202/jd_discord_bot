@@ -46,7 +46,7 @@ class Manage(commands.Cog):
 
     @slash_command(name="청소", description="메시지를 일정 개수만큼 지웁니다.")
     async def clear(
-        self, ctx: ApplicationContext, count: Option(int, "삭제할 메시지의 개수를 입력하세요.")
+        self, ctx: ApplicationContext, count: Option(int, "삭제할 메시지의 개수를 입력하세요.", name="개수")
     ):
         if ctx.author.guild_permissions.administrator:
             if count:
