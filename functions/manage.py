@@ -4,7 +4,6 @@ from utils.commands import slash_command
 from discord.commands import ApplicationContext, Option
 from config import color, bad
 import time
-import asyncio
 
 
 class Manage(commands.Cog):
