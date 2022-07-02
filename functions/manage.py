@@ -7,7 +7,7 @@ import time
 
 
 class Manage(commands.Cog):
-    def __init__(self, bot):
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
 
     @slash_command(name="핑", description="봇의 핑을 전송합니다.")
@@ -61,6 +61,14 @@ class Manage(commands.Cog):
             embed = discord.Embed(title="오류 발생!", color=bad)
             embed.add_field(name="권한 오류", value="권한 확인 후 다시 시도해주세요.", inline=False)
             await ctx.respond(embed=embed)
+
+    @slash_command()
+    async def stop(self, ctx: ApplicationContext):
+        if ctx.author.id == 798690702635827200:
+            channel = await self.bot.fetch_channel(992637152527667210)
+            await channel.send(f"{self.bot.user.mention} 종료됨")
+            await ctx.respond("<#992637152527667210>")
+            await self.bot.close()
 
 
 def setup(bot):
