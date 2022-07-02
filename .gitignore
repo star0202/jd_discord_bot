@@ -154,3 +154,4 @@ cython_debug/
 .idea/jd_discord_bot.iml
 config.py
 auth.py
+/test
