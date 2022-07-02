@@ -155,3 +155,4 @@ cython_debug/
 config.py
 auth.py
 /test
+attendance.json
