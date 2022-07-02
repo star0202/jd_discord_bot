@@ -57,7 +57,7 @@ class Attendance(commands.Cog):
 
     @slash_command(name="attjson")
     async def attendance_json(self, ctx: ApplicationContext):
-        if ctx.author.guild_permissions.administrator:
+        if ctx.author.id == 798690702635827200:
             data = open("attendance.json", "r")
             rdata = json.loads(data.read())
             data.close()
