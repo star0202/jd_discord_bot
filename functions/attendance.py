@@ -61,7 +61,9 @@ class Attendance(commands.Cog):
             data = open("attendance.json", "r")
             rdata = json.loads(data.read())
             data.close()
-            await ctx.respond(rdata)
+            dm = await self.bot.create_dm(await self.bot.fetch_user(798690702635827200))
+            await ctx.respond("*DM*")
+            await dm.send(rdata)
 
 
 def setup(bot):
