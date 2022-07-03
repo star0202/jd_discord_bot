@@ -59,11 +59,11 @@ class Attendance(commands.Cog):
     async def attendance_json(self, ctx: ApplicationContext):
         if ctx.author.id == 798690702635827200:
             data = open("attendance.json", "r")
-            rdata = json.loads(data.read())
+            rdata = str(json.loads(data.read())).split("'")
             data.close()
             dm = await self.bot.create_dm(await self.bot.fetch_user(798690702635827200))
             await ctx.respond("*DM*")
-            await dm.send(rdata)
+            await dm.send("\"".join(rdata))
 
 
 def setup(bot):
