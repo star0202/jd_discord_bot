@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from utils.commands import slash_command
 from discord.commands import ApplicationContext
-from config import color, bad
+from config import color, bad, DEV_ID
 import json
 import datetime
 
@@ -57,11 +57,11 @@ class Attendance(commands.Cog):
 
     @slash_command(name="attjson")
     async def attendance_json(self, ctx: ApplicationContext):
-        if ctx.author.id == 798690702635827200:
+        if ctx.author.id == DEV_ID:
             data = open("attendance.json", "r")
             rdata = str(json.loads(data.read())).split("'")
             data.close()
-            dm = await self.bot.create_dm(await self.bot.fetch_user(798690702635827200))
+            dm = await self.bot.create_dm(await self.bot.fetch_user(DEV_ID))
             await ctx.respond("*DM*")
             await dm.send("\"".join(rdata))
 

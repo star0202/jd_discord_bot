@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from utils.commands import slash_command
 from discord.commands import ApplicationContext, Option
-from config import color, bad
+from config import color, bad, DEV_ID
 import time
 
 
@@ -64,10 +64,8 @@ class Manage(commands.Cog):
 
     @slash_command()
     async def stop(self, ctx: ApplicationContext):
-        if ctx.author.id == 798690702635827200:
-            channel = await self.bot.fetch_channel(992637152527667210)
-            await channel.send(f"{self.bot.user.mention} 종료됨")
-            await ctx.respond("<#992637152527667210>")
+        if ctx.author.id == DEV_ID:
+            await ctx.respond("종료됨")
             await self.bot.close()
 
 
