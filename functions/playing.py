@@ -235,4 +235,9 @@ class TicTacToe(discord.ui.View):
 
 
 def setup(bot):
+    print("playing.py loaded")
     bot.add_cog(Playing())
+
+
+def teardown():
+    print("playing.py loaded")

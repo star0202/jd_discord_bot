@@ -21,6 +21,6 @@ async def on_ready():
 for filename in os.listdir("functions"):
     if filename.endswith(".py"):
         bot.load_extension(f"functions.{filename[:-3]}")
-
+print(f"{len(bot.extensions)} extensions loaded)")
 
 bot.run(token)

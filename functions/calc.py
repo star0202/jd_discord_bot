@@ -122,4 +122,9 @@ class Calc(commands.Cog):
 
 
 def setup(bot):
+    print("calc.py loaded")
     bot.add_cog(Calc())
+
+
+def teardown():
+    print("calc.py loaded")

@@ -68,6 +68,17 @@ class Manage(commands.Cog):
             await ctx.respond("종료됨")
             await self.bot.close()
 
+    @slash_command()
+    async def reload_ext(self, ctx: ApplicationContext, ext_name: Option(str)):
+        if ctx.author.id == DEV_ID:
+            self.bot.reload_extension(f"functions.{ext_name}")
+            await ctx.respond(f"{ext_name}.py reloaded")
+
 
 def setup(bot):
+    print("manage.py loaded")
     bot.add_cog(Manage(bot))
+
+
+def teardown():
+    print("manage.py unloaded")

@@ -68,4 +68,9 @@ class Attendance(commands.Cog):
 
 
 def setup(bot):
+    print("attendance.py loaded")
     bot.add_cog(Attendance(bot))
+
+
+def teardown():
+    print("attendance.py loaded")
