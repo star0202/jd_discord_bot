@@ -5,6 +5,7 @@ from discord.commands import ApplicationContext
 from config import color, bad, DEV_ID
 import json
 import datetime
+from pytz import timezone
 
 
 class Attendance(commands.Cog):
@@ -16,7 +17,7 @@ class Attendance(commands.Cog):
         self,
         ctx: ApplicationContext
     ):
-        now = datetime.datetime.now()
+        now = datetime.datetime.now(timezone("Asia/Seoul"))
         data = open("attendance.json", "r")
         rdata = json.loads(data.read())
         data.close()

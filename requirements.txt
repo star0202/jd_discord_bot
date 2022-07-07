@@ -38,3 +38,4 @@ soupsieve==2.3.2.post1
 urllib3==1.26.9
 yarl==1.7.2
 youtube-dl==2021.12.17
+pytz~=2022.1
