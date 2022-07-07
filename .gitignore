@@ -151,3 +151,4 @@ config.py
 auth.py
 /test
 attendance.json
+auth.py
