@@ -150,4 +150,5 @@ cython_debug/
 config.py
 auth.py
 /test
+/old
 attendance.json
