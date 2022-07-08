@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from utils.commands import slash_command
 from discord.commands import ApplicationContext, Option
-from config import color, bad, DEV_ID
+from config import COLOR, BAD, DEV_ID
 import time
 
 
@@ -12,7 +12,7 @@ class Manage(commands.Cog):
 
     @slash_command(name="핑", description="봇의 핑을 전송합니다.")
     async def ping(self, ctx: ApplicationContext):
-        embed = discord.Embed(title=":ping_pong: 퐁!", color=color)
+        embed = discord.Embed(title=":ping_pong: 퐁!", color=COLOR)
         embed.add_field(
             name="discord API Ping: ", value=f"{round(ctx.bot.latency * 1000)} ms"
         )
@@ -34,7 +34,7 @@ class Manage(commands.Cog):
         while s >= 60:
             s = s - 60
             m += 1
-        embed = discord.Embed(title="봇 정보", color=color)
+        embed = discord.Embed(title="봇 정보", color=COLOR)
         embed.set_thumbnail(url=ctx.bot.user.avatar.url)
         embed.add_field(name="봇 이름", value=f"**{ctx.bot.user.name}** ({str(ctx.bot.user)})", inline=False)
         embed.add_field(
@@ -51,14 +51,14 @@ class Manage(commands.Cog):
         if ctx.author.guild_permissions.administrator:
             if count:
                 await ctx.channel.purge(limit=count)
-                embed = discord.Embed(title="청소 완료!", color=color)
+                embed = discord.Embed(title="청소 완료!", color=COLOR)
                 embed.add_field(name="삭제한 메시지의 수:", value=f"{count}", inline=False)
                 await ctx.respond(embed=embed)
             else:
-                embed = discord.Embed(title="오류 발생!", color=bad)
+                embed = discord.Embed(title="오류 발생!", color=BAD)
                 embed.add_field(name="값 오류", value="올바른 자연수 값을 입력해주세요.")
         else:
-            embed = discord.Embed(title="오류 발생!", color=bad)
+            embed = discord.Embed(title="오류 발생!", color=BAD)
             embed.add_field(name="권한 오류", value="권한 확인 후 다시 시도해주세요.", inline=False)
             await ctx.respond(embed=embed)
 
@@ -76,9 +76,9 @@ class Manage(commands.Cog):
 
 
 def setup(bot):
-    print("manage.py loaded")
+    print("manage.py is loaded")
     bot.add_cog(Manage(bot))
 
 
 def teardown():
-    print("manage.py unloaded")
+    print("manage.py is unloaded")

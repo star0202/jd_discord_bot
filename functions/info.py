@@ -3,7 +3,7 @@ import discord
 from utils.commands import slash_command
 from utils.timeconvert import datetime_to_unix
 from discord.commands import ApplicationContext, Option
-from config import color
+from config import COLOR
 
 
 class Info(commands.Cog):
@@ -18,7 +18,7 @@ class Info(commands.Cog):
         if user is None:
             user = ctx.author
         if user.color == discord.Colour.default():
-            embed = discord.Embed(colour=color, title=user.display_name)
+            embed = discord.Embed(colour=COLOR, title=user.display_name)
         else:
             embed = discord.Embed(colour=user.color, title=str(user))
         embed.set_thumbnail(url=user.display_avatar.url)
@@ -37,7 +37,7 @@ class Info(commands.Cog):
     @slash_command(name="서버정보", description="현재 서버의 정보를 전송합니다.")
     async def serverinfo(self, ctx: ApplicationContext):
         server = ctx.guild
-        embed = discord.Embed(colour=color, title=server.name)
+        embed = discord.Embed(colour=COLOR, title=server.name)
         embed.set_thumbnail(url=server.icon.url)
         embed.add_field(name="소유자", value=f"{server.owner.display_name}({str(server.owner)})")
         a = 0

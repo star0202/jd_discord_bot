@@ -4,7 +4,7 @@ from discord.ext import commands
 from utils.commands import slash_command
 from discord.commands import ApplicationContext, Option
 from typing import List
-from config import color, bad
+from config import COLOR, BAD
 
 
 class Playing(commands.Cog):
@@ -17,7 +17,7 @@ class Playing(commands.Cog):
         rsp_table = ["가위", "바위", "보"]
         if user not in rsp_table:
             embed = discord.Embed(
-                title="오류 발생!", color=bad
+                title="오류 발생!", color=BAD
             )
             embed.add_field(
                 name="값 오류", value="`가위, 바위, 보` 중에 하나를 입력해주세요.", inline=False
@@ -35,7 +35,7 @@ class Playing(commands.Cog):
             embed = discord.Embed(
                 title="가위바위보",
                 description=f"{ctx.author.display_name} vs 봇",
-                color=color,
+                color=COLOR,
             )
             embed.add_field(name="**결과:**", value=f"{result}", inline=False)
             await ctx.respond(embed=embed)
@@ -58,7 +58,7 @@ class Playing(commands.Cog):
                 await ctx.respond(embed=embed)
             elif second:
                 embed = discord.Embed(
-                    title="주사위", description=f"{first} ~ {second}", color=bad
+                    title="주사위", description=f"{first} ~ {second}", color=BAD
                 )
                 embed.add_field(
                     name="**결과:**",
@@ -68,7 +68,7 @@ class Playing(commands.Cog):
                 await ctx.respond(embed=embed)
             else:
                 embed = discord.Embed(
-                    title="주사위", description=f"1 ~ {first}", color=color
+                    title="주사위", description=f"1 ~ {first}", color=COLOR
                 )
                 embed.add_field(
                     name="**결과:**",
@@ -78,7 +78,7 @@ class Playing(commands.Cog):
                 await ctx.respond(embed=embed)
         except Exception:
             embed = discord.Embed(
-                title="오류 발생!", color=bad
+                title="오류 발생!", color=BAD
             )
             embed.add_field(
                 name="값 오류",
@@ -93,7 +93,7 @@ class Playing(commands.Cog):
         embed = discord.Embed(
             title="홀짝 게임",
             description="1부터 6까지 나오는 주사위의 수가 짝수일지, 홀수일지 아래의 반응을 눌러 예측해보세요!",
-            color=color,
+            color=COLOR,
         )
         embed.add_field(name="> 주사위의 눈", value="?", inline=False)
         embed.add_field(name="> 선택지", value="홀수: 🔴\n짝수: 🔵", inline=True)
@@ -115,20 +115,20 @@ class Playing(commands.Cog):
                 str(reaction) == "🔵" and dice % 2 == 0
             ):
                 embed = discord.Embed(
-                    title="홀짝 게임", description="정답입니다!", color=color
+                    title="홀짝 게임", description="정답입니다!", color=COLOR
                 )
                 embed.add_field(name="> 주사위의 눈", value=f"{dice}")
                 embed.add_field(name="> 당신의 선택", value=f"{str(reaction)}", inline=False)
             else:
                 embed = discord.Embed(
-                    title="홀짝 게임", description="틀렸습니다..", color=color
+                    title="홀짝 게임", description="틀렸습니다..", color=COLOR
                 )
                 embed.add_field(name="> 주사위의 눈", value=f"{dice}")
                 embed.add_field(name="> 당신의 선택", value=f"{str(reaction)}", inline=False)
             await msg.edit(embed=embed)
         except Exception:
             embed = discord.Embed(
-                title="오류 발생!", description="잠시 후에 다시 시도해주세요", color=bad
+                title="오류 발생!", description="잠시 후에 다시 시도해주세요", color=BAD
             )
             await msg.edit(embed=embed)
 
@@ -140,7 +140,7 @@ class Playing(commands.Cog):
     ):
         if rival.bot:
             embed = discord.Embed(
-                title="오류 발생!", color=bad
+                title="오류 발생!", color=BAD
             )
             embed.add_field(name="오류 내용:", value="봇과는 대결할 수 없습니다.", inline=False)
             await ctx.respond(embed=embed)
@@ -235,9 +235,9 @@ class TicTacToe(discord.ui.View):
 
 
 def setup(bot):
-    print("playing.py loaded")
+    print("playing.py is loaded")
     bot.add_cog(Playing())
 
 
 def teardown():
-    print("playing.py loaded")
+    print("playing.py is unloaded")

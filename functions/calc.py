@@ -18,7 +18,7 @@ class InteractiveView(discord.ui.View):
     @discord.ui.button(style=discord.ButtonStyle.blurple, label="2", row=0)
     async def two(self, button: discord.ui.Button, interaction: discord.Interaction):
         self.expr += "2"
-        await interaction.response.edit_message(content=f"```\n{self.expr}\n```")
+        await interaction.response.edit_message(content="```\n{self.expr}\n```")
 
     @discord.ui.button(style=discord.ButtonStyle.blurple, label="3", row=0)
     async def three(self, button: discord.ui.Button, interaction: discord.Interaction):
@@ -122,9 +122,9 @@ class Calc(commands.Cog):
 
 
 def setup(bot):
-    print("calc.py loaded")
+    print("calc.py is loaded")
     bot.add_cog(Calc())
 
 
 def teardown():
-    print("calc.py loaded")
+    print("calc.py is unloaded")
