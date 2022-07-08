@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from utils.commands import slash_command
 from discord.commands import ApplicationContext
-from config import color, bad, DEV_ID
+from config import COLOR, BAD, DEV_ID
 import json
 import datetime
 from pytz import timezone
@@ -23,7 +23,7 @@ class Attendance(commands.Cog):
         data.close()
         try:
             if rdata["users"][str(ctx.author.id)][0] == now.strftime("%Y-%m-%d"):
-                embed = discord.Embed(title="경고", colour=bad, description="출석체크는 하루에 한 번만 가능합니다.")
+                embed = discord.Embed(title="경고", colour=BAD, description="출석체크는 하루에 한 번만 가능합니다.")
                 await ctx.respond(embed=embed)
                 return
         except KeyError:
@@ -31,9 +31,8 @@ class Attendance(commands.Cog):
         rdata["users"][str(ctx.author.id)][0] = now.strftime("%Y-%m-%d")
         rdata["users"][str(ctx.author.id)][1] += 1
         wdata = json.dumps(rdata, indent=4)
-        with open("attendance.json", "w") as outfile:
-            outfile.write(wdata)
-        embed = discord.Embed(title="출석체크 성공!", color=color)
+        open("attendance.json", "w").write(wdata)
+        embed = discord.Embed(title="출석체크 성공!", color=COLOR)
         embed.add_field(name="날짜", value=f"{now.year}년 {now.month}월 {now.day}일")
         await ctx.respond(embed=embed)
 
@@ -53,7 +52,7 @@ class Attendance(commands.Cog):
                 desc += f"{x+1}등: {user.mention}({ranking[x][1]}회)\n"
             except IndexError:
                 break
-        embed = discord.Embed(title="출석체크 순위", color=color, description=desc)
+        embed = discord.Embed(title="출석체크 순위", color=COLOR, description=desc)
         await ctx.respond(embed=embed)
 
     @slash_command(name="attjson")
@@ -68,9 +67,9 @@ class Attendance(commands.Cog):
 
 
 def setup(bot):
-    print("attendance.py loaded")
+    print("attendance.py is loaded")
     bot.add_cog(Attendance(bot))
 
 
 def teardown():
-    print("attendance.py loaded")
+    print("attendance.py unloaded")
