@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from utils.commands import slash_command
 from discord.commands import ApplicationContext, Option
-from config import COLOR, BAD, DEV_ID, DB_CHANNEL_ID
+from config import COLOR, BAD, DB_CHANNEL_ID
 import json
 import datetime
 from pytz import timezone
@@ -20,7 +20,7 @@ class Attendance(commands.Cog):
         now = datetime.datetime.now(timezone("Asia/Seoul"))
         db_channel = await self.bot.fetch_channel(DB_CHANNEL_ID)
         db_pins = await db_channel.pins()
-        db = db_pins[-1]
+        db = db_pins[0]
         data = json.loads(db.content)
         try:
             if data["users"][str(ctx.author.id)][0] == now.strftime("%Y-%m-%d"):
@@ -40,7 +40,7 @@ class Attendance(commands.Cog):
     async def attendance_ranking(self, ctx: ApplicationContext):
         db_channel = await self.bot.fetch_channel(DB_CHANNEL_ID)
         db_pins = await db_channel.pins()
-        db = db_pins[-1]
+        db = db_pins[0]
         data = json.loads(db.content)
         userdata: dict = data["users"]
         ranking = {}
@@ -57,22 +57,11 @@ class Attendance(commands.Cog):
         embed = discord.Embed(title="출석체크 순위", color=COLOR, description=desc)
         await ctx.respond(embed=embed)
 
-    @slash_command(name="attjson")
-    async def attendance_json(self, ctx: ApplicationContext):
-        if ctx.author.id == DEV_ID:
-            db_channel = await self.bot.fetch_channel(DB_CHANNEL_ID)
-            db_pins = await db_channel.pins()
-            db = db_pins[-1]
-            data = json.loads(db.content)
-            dm = await self.bot.create_dm(await self.bot.fetch_user(DEV_ID))
-            await ctx.respond("*DM*")
-            await dm.send("\"".join(data))
-
     @slash_command(name="attedit")
     async def attendance_edit(self, ctx: ApplicationContext, jsondata: Option(str)):
         db_channel = await self.bot.fetch_channel(DB_CHANNEL_ID)
         db_pins = await db_channel.pins()
-        db = db_pins[-1]
+        db = db_pins[0]
         await db.edit(jsondata)
         await ctx.respond("Done")
 

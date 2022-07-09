@@ -74,6 +74,12 @@ class Manage(commands.Cog):
             self.bot.reload_extension(f"functions.{ext_name}")
             await ctx.respond(f"{ext_name}.py reloaded")
 
+    @slash_command()
+    async def send_here(self, ctx: ApplicationContext, content: Option(str)):
+        await ctx.send(content)
+        delete_this = await ctx.respond("random respond")
+        await delete_this.delete_original_message()
+
 
 def setup(bot):
     print("manage.py is loaded")
