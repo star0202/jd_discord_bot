@@ -1,11 +1,10 @@
 import discord
 from discord.ext import commands
 from utils.commands import slash_command
+from utils.gettime import get_time
 from discord.commands import ApplicationContext, Option
 from config import COLOR, BAD, DB_CHANNEL_ID
 import json
-import datetime
-from pytz import timezone
 
 
 class Attendance(commands.Cog):
@@ -17,7 +16,7 @@ class Attendance(commands.Cog):
         self,
         ctx: ApplicationContext
     ):
-        now = datetime.datetime.now(timezone("Asia/Seoul"))
+        now = get_time()
         db_channel = await self.bot.fetch_channel(DB_CHANNEL_ID)
         db_pins = await db_channel.pins()
         db = db_pins[0]
