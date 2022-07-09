@@ -3,7 +3,7 @@ from discord.ext import commands
 from utils.commands import slash_command
 from utils.gettime import get_time
 from discord.commands import ApplicationContext, Option
-from config import COLOR, BAD, DB_CHANNEL_ID
+from config import COLOR, BAD, DB_CHANNEL_ID, DEV_ID
 import json
 
 
@@ -58,11 +58,12 @@ class Attendance(commands.Cog):
 
     @slash_command(name="attedit")
     async def attendance_edit(self, ctx: ApplicationContext, jsondata: Option(str)):
-        db_channel = await self.bot.fetch_channel(DB_CHANNEL_ID)
-        db_pins = await db_channel.pins()
-        db = db_pins[0]
-        await db.edit(jsondata)
-        await ctx.respond("Done")
+        if ctx.author.id == DEV_ID:
+            db_channel = await self.bot.fetch_channel(DB_CHANNEL_ID)
+            db_pins = await db_channel.pins()
+            db = db_pins[0]
+            await db.edit(jsondata)
+            await ctx.respond("Done")
 
 
 def setup(bot):
