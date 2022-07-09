@@ -1,15 +1,15 @@
 import discord
 from discord.ext import commands
 from utils.commands import slash_command
-from discord.commands import ApplicationContext
-from config import COLOR, BAD, DEV_ID
+from discord.commands import ApplicationContext, Option
+from config import COLOR, BAD, DEV_ID, DB_CHANNEL_ID
 import json
 import datetime
 from pytz import timezone
 
 
 class Attendance(commands.Cog):
-    def __init__(self, bot:commands.Bot):
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
 
     @slash_command(name="출첵", description="출석체크를 합니다.")
@@ -18,29 +18,31 @@ class Attendance(commands.Cog):
         ctx: ApplicationContext
     ):
         now = datetime.datetime.now(timezone("Asia/Seoul"))
-        data = open("attendance.json", "r")
-        rdata = json.loads(data.read())
-        data.close()
+        db_channel = await self.bot.fetch_channel(DB_CHANNEL_ID)
+        db_pins = await db_channel.pins()
+        db = db_pins[-1]
+        data = json.loads(db.content)
         try:
-            if rdata["users"][str(ctx.author.id)][0] == now.strftime("%Y-%m-%d"):
+            if data["users"][str(ctx.author.id)][0] == now.strftime("%Y-%m-%d"):
                 embed = discord.Embed(title="경고", colour=BAD, description="출석체크는 하루에 한 번만 가능합니다.")
                 await ctx.respond(embed=embed)
                 return
         except KeyError:
-            rdata["users"][str(ctx.author.id)] = [0, 0]
-        rdata["users"][str(ctx.author.id)][0] = now.strftime("%Y-%m-%d")
-        rdata["users"][str(ctx.author.id)][1] += 1
-        wdata = json.dumps(rdata, indent=4)
-        open("attendance.json", "w").write(wdata)
+            data["users"][str(ctx.author.id)] = [0, 0]
+        data["users"][str(ctx.author.id)][0] = now.strftime("%Y-%m-%d")
+        data["users"][str(ctx.author.id)][1] += 1
+        await db.edit("\"".join(str(data).split("'")))
         embed = discord.Embed(title="출석체크 성공!", color=COLOR)
         embed.add_field(name="날짜", value=f"{now.year}년 {now.month}월 {now.day}일")
         await ctx.respond(embed=embed)
 
     @slash_command(name="출첵순위", description="출석체크 순위를 출력합니다.")
     async def attendance_ranking(self, ctx: ApplicationContext):
-        data = open("attendance.json", "r")
-        userdata:dict = json.loads(data.read())["users"]
-        data.close()
+        db_channel = await self.bot.fetch_channel(DB_CHANNEL_ID)
+        db_pins = await db_channel.pins()
+        db = db_pins[-1]
+        data = json.loads(db.content)
+        userdata: dict = data["users"]
         ranking = {}
         for x in range(len(userdata)):
             ranking[list(userdata.keys())[x]] = userdata[list(userdata.keys())[x]][1]
@@ -48,7 +50,7 @@ class Attendance(commands.Cog):
         desc = ""
         for x in range(10):
             try:
-                user:discord.User = await self.bot.fetch_user(ranking[x][0])
+                user: discord.User = await self.bot.fetch_user(ranking[x][0])
                 desc += f"{x+1}등: {user.mention}({ranking[x][1]}회)\n"
             except IndexError:
                 break
@@ -58,12 +60,21 @@ class Attendance(commands.Cog):
     @slash_command(name="attjson")
     async def attendance_json(self, ctx: ApplicationContext):
         if ctx.author.id == DEV_ID:
-            data = open("attendance.json", "r")
-            rdata = str(json.loads(data.read())).split("'")
-            data.close()
+            db_channel = await self.bot.fetch_channel(DB_CHANNEL_ID)
+            db_pins = await db_channel.pins()
+            db = db_pins[-1]
+            data = json.loads(db.content)
             dm = await self.bot.create_dm(await self.bot.fetch_user(DEV_ID))
             await ctx.respond("*DM*")
-            await dm.send("\"".join(rdata))
+            await dm.send("\"".join(data))
+
+    @slash_command(name="attedit")
+    async def attendance_edit(self, ctx: ApplicationContext, jsondata: Option(str)):
+        db_channel = await self.bot.fetch_channel(DB_CHANNEL_ID)
+        db_pins = await db_channel.pins()
+        db = db_pins[-1]
+        await db.edit(jsondata)
+        await ctx.respond("Done")
 
 
 def setup(bot):
