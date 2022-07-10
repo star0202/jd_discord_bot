@@ -60,7 +60,12 @@ class Money(commands.Cog):
         db_pins = await db_channel.pins()
         db = db_pins[1]
         data = json.loads(db.content)
-        if data["users"][str(ctx.author.id)][1] < betted_money:
+        try:
+            if data["users"][str(ctx.author.id)][1] < betted_money:
+                embed = discord.Embed(title="경고", color=BAD, description="베팅 금액이 통장 잔액보다 많습니다.")
+                await ctx.respond(embed=embed)
+                return
+        except KeyError:
             embed = discord.Embed(title="경고", color=BAD, description="베팅 금액이 통장 잔액보다 많습니다.")
             await ctx.respond(embed=embed)
             return
@@ -78,6 +83,16 @@ class Money(commands.Cog):
             await ctx.respond(embed=embed)
         await db.edit("\"".join(str(data).split("'")))
 
+    @slash_command(name="통장", description="통장 잔액을 확인합니다.")
+    async def money_much(self, ctx: ApplicationContext):
+        db_channel = await self.bot.fetch_channel(DB_CHANNEL_ID)
+        db_pins = await db_channel.pins()
+        db = db_pins[1]
+        data = json.loads(db.content)
+        money = data["users"][str(ctx.author.id)][1]
+        embed = discord.Embed(title="통장 잔액", color=COLOR, description=f"{money}원")
+        await ctx.respond(embed=embed)
+
 
 def setup(bot):
     print("money.py is loaded")
@@ -85,4 +100,4 @@ def setup(bot):
 
 
 def teardown():
-    print("money.py unloaded")
+    print("money.py is unloaded")
