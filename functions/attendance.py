@@ -72,4 +72,4 @@ def setup(bot):
 
 
 def teardown():
-    print("attendance.py unloaded")
+    print("attendance.py is unloaded")

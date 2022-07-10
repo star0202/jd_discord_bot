@@ -55,9 +55,9 @@ class Info(commands.Cog):
 
 
 def setup(bot):
-    print("info.py loaded")
+    print("info.py is loaded")
     bot.add_cog(Info())
 
 
 def teardown():
-    print("info.py loaded")
+    print("info.py is unloaded")
