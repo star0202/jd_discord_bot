@@ -44,6 +44,13 @@ pip install -r requirements.txt
 - 확인 후 머지한다
 - stable 브랜치가 수정되면 바로 Heroku에서 Deploy 후 봇이 리붓된다
 
+## 개발 시 주의사항
+- <b>stable 브랜치를 클론하지 않도록 주의한다, 만약 클론했을 경우 모든 파일을 삭제한다</b>
+- <b>토큰이 유출되지 않도록 주의한다</b>
+- PEP 8을 준수한다
+- discord 모듈이 requirements.txt에 없다는 오류는 무시한다
+- <메세지 타입>.edit() 함수가 parameter가 없다는 
+
 # 예시 코그
 
 ```py
