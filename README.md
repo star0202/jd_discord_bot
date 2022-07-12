@@ -42,6 +42,7 @@ pip install -r requirements.txt
 # 예시 코그
 
 ```py
+# myextension.py
 from discord.ext import commands
 
 
