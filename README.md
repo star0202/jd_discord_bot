@@ -25,7 +25,7 @@ requirements.txt : 의존성 라이브러리 목록
 
 runtime.txt : Heroku 파이썬 버전(수정 금지)
 
-# 개발에 참여
+# 개발에 참여(윈도우 기준)
 
 - dev 브랜치를 클론한다
 ```pwsh
@@ -33,7 +33,10 @@ git clone -b dev git@github.com:star0202/jd_discord_bot.git
 ```
 - 의존성 라이브러리를 설치한다
 ```pwsh
+# venv 미사용 #
 pip install -r requirements.txt
+# venv 사용 #
+./venv/scripts/pip install -r requirements.txt
 ```
 - auth.py와 config.py를 생성한다(위의 코드 구조 참고)
 - 개발을 마친 후, dev 브랜치에 커밋하고 stable <- dev로 PR을 연다
