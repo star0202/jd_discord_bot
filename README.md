@@ -42,6 +42,7 @@ pip install -r requirements.txt
 - auth.py와 config.py를 생성한다(위의 코드 구조 참고)
 - 개발을 마친 후, dev 브랜치에 커밋하고 stable <- dev로 PR을 연다
 - 확인 후 머지한다
+- stable 브랜치가 수정되면 바로 Heroku에서 Deploy 후 봇이 리붓된다
 
 # 예시 코그
 
