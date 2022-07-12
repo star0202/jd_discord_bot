@@ -49,7 +49,7 @@ pip install -r requirements.txt
 - <b>토큰이 유출되지 않도록 주의한다</b>
 - PEP 8을 준수한다
 - discord 모듈이 requirements.txt에 없다는 오류는 무시한다
-- <메세지 타입>.edit() method가 parameter가 없다는 오류는 무시한다
+- <메세지>.edit() method가 parameter가 없다는 오류는 무시한다
 
 # 예시 코그
 
