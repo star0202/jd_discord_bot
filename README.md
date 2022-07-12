@@ -35,6 +35,7 @@ git clone -b dev git@github.com:star0202/jd_discord_bot.git
 ```pwsh
 # venv 미사용 #
 pip install -r requirements.txt
+
 # venv 사용 #
 ./venv/scripts/pip install -r requirements.txt
 ```
