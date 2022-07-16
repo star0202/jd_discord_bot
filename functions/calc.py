@@ -84,8 +84,8 @@ class InteractiveView(discord.ui.View):
     async def equal(self, button: discord.ui.Button, interaction: discord.Interaction):
         try:
             self.expr = await self.calc.calculate(self.expr)
-        except:
-            return await interaction.response.edit_message(content=f"```\n잘못된 계산이에요.\n```")
+        except Exception:
+            return await interaction.response.edit_message(content="```\n잘못된 계산이에요.\n```")
         await interaction.response.edit_message(content=f"```\n{self.expr}\n```")
 
     @discord.ui.button(style=discord.ButtonStyle.green, label="-", row=3)

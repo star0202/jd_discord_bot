@@ -105,9 +105,9 @@ class Playing(commands.Cog):
 
             def check(react, usr):
                 return (
-                        str(react) in ["🔴", "🔵"]
-                        and usr == ctx.author
-                        and react.message.id == msg.id
+                    str(react) in ["🔴", "🔵"]
+                    and usr == ctx.author
+                    and react.message.id == msg.id
                 )
 
             reaction, user = await ctx.bot.wait_for("reaction_add", check=check)
