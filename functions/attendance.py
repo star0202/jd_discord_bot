@@ -5,6 +5,9 @@ from utils.gettime import get_time
 from discord.commands import ApplicationContext, Option
 from config import COLOR, BAD, DB_CHANNEL_ID, DEV_ID
 import json
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class Attendance(commands.Cog):
@@ -67,9 +70,9 @@ class Attendance(commands.Cog):
 
 
 def setup(bot):
-    print("attendance.py is loaded")
+    logger.info("Loaded")
     bot.add_cog(Attendance(bot))
 
 
 def teardown():
-    print("attendance.py is unloaded")
+    logger.info("Unloaded")

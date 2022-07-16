@@ -4,6 +4,9 @@ from utils.commands import slash_command
 from utils.timeconvert import datetime_to_unix
 from discord.commands import ApplicationContext, Option
 from config import COLOR
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class Info(commands.Cog):
@@ -55,9 +58,9 @@ class Info(commands.Cog):
 
 
 def setup(bot):
-    print("info.py is loaded")
+    logger.info("Loaded")
     bot.add_cog(Info())
 
 
 def teardown():
-    print("info.py is unloaded")
+    logger.info("Unloaded")

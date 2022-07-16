@@ -4,6 +4,9 @@ from utils.commands import slash_command
 from discord.commands import ApplicationContext, Option
 from config import COLOR, BAD
 from utils.hanspell import spell_checker
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class SpellCheck(commands.Cog):
@@ -22,9 +25,9 @@ class SpellCheck(commands.Cog):
 
 
 def setup(bot):
-    print("spellcheck.py is loaded")
+    logger.info("Loaded")
     bot.add_cog(SpellCheck())
 
 
 def teardown():
-    print("spellcheck.py is unloaded")
+    logger.info("Unloaded")

@@ -5,6 +5,9 @@ from utils.commands import slash_command
 from discord.commands import ApplicationContext, Option
 from typing import List
 from config import COLOR, BAD
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class Playing(commands.Cog):
@@ -235,9 +238,9 @@ class TicTacToe(discord.ui.View):
 
 
 def setup(bot):
-    print("playing.py is loaded")
+    logger.info("Loaded")
     bot.add_cog(Playing())
 
 
 def teardown():
-    print("playing.py is unloaded")
+    logger.info("Unloaded")
