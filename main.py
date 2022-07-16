@@ -5,7 +5,7 @@ import os
 from auth import token
 from config import STATUS
 
-bot = commands.Bot(command_prefix="v!", intents = discord.Intents.all(), help_command=None)
+bot = commands.Bot(command_prefix="v!", intents=discord.Intents.all(), help_command=None)
 bot.start_time = time.time()
 bot.load_extension('jishaku')
 

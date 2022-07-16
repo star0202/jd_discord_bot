@@ -7,4 +7,3 @@ class CheckResult:
     WRONG_SPACING = 2
     AMBIGUOUS = 3
     STATISTICAL_CORRECTION = 4
-

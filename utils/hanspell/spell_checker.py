@@ -10,7 +10,6 @@ import sys
 from collections import OrderedDict
 import xml.etree.ElementTree as ET
 
-from . import __version__
 from .response import Checked
 from .constants import base_url
 from .constants import CheckResult
@@ -20,7 +19,7 @@ PY3 = sys.version_info[0] == 3
 
 
 def _remove_tags(text):
-    text = u'<content>{}</content>'.format(text).replace('<br>','')
+    text = u'<content>{}</content>'.format(text).replace('<br>', '')
     if not PY3:
         text = text.encode('utf-8')
 
@@ -88,7 +87,6 @@ def check(text):
             tmp = word[:pos]
         elif tmp != '':
             word = u'{}{}'.format(tmp, word)
-        
         if word[-5:] == '<end>':
             word = word.replace('<end>', '')
             tmp = ''
