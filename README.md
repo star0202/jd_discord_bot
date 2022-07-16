@@ -43,6 +43,9 @@ pip install -r requirements.txt
 
 ```py
 from discord.ext import commands
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class MyExtension(commands.Cog):
@@ -50,12 +53,12 @@ class MyExtension(commands.Cog):
 
 
 def setup(bot):
-    print("myextension.py is loaded")
+    logger.info("Loaded")
     bot.add_cog(MyExtension())
 
 
 def teardown():
-    print("myextension.py is unloaded")
+    logger.info("Unloaded")
 ```
 
 # 참고용 문서

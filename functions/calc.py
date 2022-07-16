@@ -2,6 +2,9 @@ import discord
 from discord.ext import commands
 from utils.commands import slash_command
 from simpcalc import simpcalc
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class InteractiveView(discord.ui.View):
@@ -122,9 +125,9 @@ class Calc(commands.Cog):
 
 
 def setup(bot):
-    print("calc.py is loaded")
+    logger.info("Loaded")
     bot.add_cog(Calc())
 
 
 def teardown():
-    print("calc.py is unloaded")
+    logger.info("Unloaded")

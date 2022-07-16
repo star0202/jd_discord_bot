@@ -6,6 +6,9 @@ from discord.commands import ApplicationContext, Option
 from config import COLOR, BAD, DEV_ID, DB_CHANNEL_ID
 import random
 import json
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class Money(commands.Cog):
@@ -95,9 +98,9 @@ class Money(commands.Cog):
 
 
 def setup(bot):
-    print("money.py is loaded")
+    logger.info("Loaded")
     bot.add_cog(Money(bot))
 
 
 def teardown():
-    print("money.py is unloaded")
+    logger.info("Unloaded")
