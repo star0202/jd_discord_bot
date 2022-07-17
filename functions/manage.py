@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from utils.commands import slash_command
 from discord.commands import ApplicationContext, Option
-from config import COLOR, BAD, DEV_ID
+from config import COLOR, BAD
 import time
 import logging
 
@@ -67,13 +67,13 @@ class Manage(commands.Cog):
 
     @slash_command()
     async def stop(self, ctx: ApplicationContext):
-        if ctx.author.id == DEV_ID:
+        if ctx.author.id == self.bot.owner_id:
             await ctx.respond("종료됨")
             await self.bot.close()
 
     @slash_command()
     async def reload_ext(self, ctx: ApplicationContext, ext_name: Option(str)):
-        if ctx.author.id == DEV_ID:
+        if ctx.author.id == self.bot.owner_id:
             self.bot.unload_extension(f"functions.{ext_name}")
             self.bot.load_extension(f"functions.{ext_name}")
             await ctx.respond(f"{ext_name}.py reloaded")
