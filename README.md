@@ -2,57 +2,65 @@
 - 이 레포의 과거 기록에서 auth.py에 있는 토큰은 현재 사용되지 않는 토큰입니다
 
 # 코드 구조
-/assets : 이미지 등등
+`/assets` : 이미지 등등
 
-/functions : 코그(파일만 추가하면 main.py에서 자동으로 로드해줌)
+`/functions` : 코그(파일만 추가하면 main.py에서 자동으로 로드해줌)
 
-/utils : 자주 쓰는 기능들/모듈
+`/utils` : 자주 쓰는 기능들/모듈
 
-Procfile : Heroku 프로필(수정 금지)
+`Procfile` : Heroku 프로필(수정 금지)
 
-config.py : 컨피그 파일
-- COLOR : 기본 임베드 색 <- int(hex)
-- BAD : 좋지 않은 상황일 때 임베드 색 <- int(hex)
-- GOOD : 좋은 상황일 때 임베드 색 <- int(hex)
-- TEST_GUILD_ID : 테스트 서버 아이디 <- int
-- DEV_ID : 개발자의 아이디 <- int
-- STATUS : 상태 메세지 <- str
+`config.py` : 컨피그 파일
+- `COLOR` : 기본 임베드 색 <- `int(hex)`
+- `BAD` : 좋지 않은 상황일 때 임베드 색 <- `int(hex)`
+- `GOOD` : 좋은 상황일 때 임베드 색 <- `int(hex)`
+- `TEST_GUILD_ID` : 테스트 서버 아이디 <- `int`
+- `DEV_ID` : 개발자의 아이디 <- `int`
+- `STATUS` : 상태 메세지 <- `str`
 
-main.py : 실행파일(봇 설정, 코그 로드)
+`main.py` : 실행파일(봇 설정, 코그 로드)
 
-requirements.txt : 의존성 라이브러리 목록
+`requirements.txt` : 의존성 라이브러리 목록
 
-runtime.txt : Heroku 파이썬 버전(수정 금지)
+`runtime.txt` : `Heroku` 파이썬 버전(수정 금지)
 
-# 개발에 참여(윈도우 기준)
+# 개발에 참여
+## 개발 준비
+1. 저장소를 포크한다(오른쪽 상단 `Fork`버튼 클릭)
 
-- dev 브랜치를 클론한다
-```pwsh
-git clone -b dev git@github.com:star0202/jd_discord_bot.git
+2. 포크한 저장소를 클론한다
+```shell
+$ git clone https://github.com/<닉네임>/WhiteBot.git
 ```
-- 의존성 라이브러리를 설치한다
-```pwsh
-# venv 미사용 #
-pip install -r requirements.txt
-
-# venv 사용 #
-./venv/scripts/pip install -r requirements.txt
+3. 디펜던시를 설치한다
+```shell
+$ pip install -r requirements.txt
 ```
-- .env 파일을 설정한다
+4. 브랜치를 만든다
+
+`stable`브랜치를 복제하여 새로운 브랜치를 만든다, 
+브랜치 이름은 브랜치 이름은 버그 수정의 경우 `bug/<버그 요약>`, 
+기능 추가 및 보수의 경우 `feature/<기능 이름>`, 
+기타 코드 개선 작업 등은 `maintain/{요약}`으로 한다
+
+5. .env 파일을 설정한다
+
+프로젝트 폴더 최상단에 다음과 같은 양식으로 `.env`파일을 생성한다
 ```python
 TOKEN = "토큰"
 DB_CHANNEL_ID = "데이터베이스 채널 아이디"
 ```
-- 개발을 마친 후, dev 브랜치에 커밋하고 stable <- dev로 PR을 연다
-- 확인 후 머지한다
-- stable 브랜치가 수정되면 바로 Heroku에서 Deploy 후 봇이 리붓된다
-
-## 개발 시 주의사항
-- <b>stable 브랜치를 클론하지 않도록 주의한다, 만약 클론했을 경우 모든 파일을 삭제한다</b>
-- <b>토큰이 유출되지 않도록 주의한다</b>
-- PEP 8을 준수한다
-- discord 모듈이 requirements.txt에 없다는 경고는 무시한다
-- <메세지>.edit() method가 parameter가 없다는 경고는 무시한다
+## 개발
+- 작업하는 브랜치가 맞는지 확인한다
+- 다른 파일들을 참고하여 코드를 작성한다(코드 스타일은 전부 비슷하게)
+- 커밋 전에 `flake8`을 이용하여 포맷팅을 확인한다
+```shell
+$ python -m flake8
+```
+- 커밋 메세지는 `Fix <버그 요약> bug`, `Add <기능 이름> feature` 등등으로 작성한다
+## 봇에 반영
+- `stable`브랜치를 베이스로 해 PR을 생성하면 확인 후 `stable`브랜치에 머지된다
+- `stable`브랜치가 수정되면 `Heroku`에서 자동으로 봇을 재부팅해 코드가 봇에 반영된다
 
 # 예시 코그
 
