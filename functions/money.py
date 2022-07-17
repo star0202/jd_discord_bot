@@ -4,7 +4,7 @@ from discord.ext import commands
 from utils.commands import slash_command
 from utils.gettime import get_time
 from discord.commands import ApplicationContext, Option
-from config import COLOR, BAD, DEV_ID
+from config import COLOR, BAD
 import random
 import json
 import os
@@ -45,7 +45,7 @@ class Money(commands.Cog):
 
     @slash_command(name="moneyedit")
     async def attendance_edit(self, ctx: ApplicationContext, jsondata: Option(str)):
-        if ctx.author.id == DEV_ID:
+        if ctx.author.id == self.bot.owner_id:
             db_channel = await self.bot.fetch_channel(os.getenv("DB_CHANNEL_ID"))
             db_pins = await db_channel.pins()
             db = db_pins[1]
