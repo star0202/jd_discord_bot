@@ -1,14 +1,15 @@
 import discord
 import logging
 from discord.ext import commands
-import time
+from time import time
 import os
-from auth import token
 from config import STATUS
 import utils.logger
+from dotenv import load_dotenv
 
 
 utils.logger.setup_logging()
+load_dotenv(".env")
 logger = logging.getLogger("main")
 
 
@@ -19,9 +20,11 @@ class Viridian(commands.Bot):
             if filename.endswith(".py"):
                 self.load_extension(f"functions.{filename[:-3]}")
         logger.info(f"{len(self.extensions)} extensions are completely loaded")
+        self.start_time = time()
+        self.load_extension('jishaku')
 
     async def on_ready(self):
-        logger.info(f"Logged in as {bot.user.name}")
+        logger.info(f"Logged in as {self.user.name}")
         await self.change_presence(
             status=discord.Status.online,
             activity=discord.Game(STATUS),
@@ -29,7 +32,4 @@ class Viridian(commands.Bot):
 
 
 bot = Viridian()
-bot.start_time = time.time()
-bot.load_extension('jishaku')
-
-bot.run(token)
+bot.run(os.getenv("TOKEN"))
