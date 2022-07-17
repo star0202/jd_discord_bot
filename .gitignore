@@ -147,8 +147,5 @@ cython_debug/
 .idea/
 .idea/vcs.xml
 .idea/jd_discord_bot.iml
-config.py
-auth.py
 /test
-/old
 attendance.json

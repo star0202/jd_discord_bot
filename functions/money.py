@@ -1,14 +1,17 @@
 import discord
+import dotenv
 from discord.ext import commands
 from utils.commands import slash_command
 from utils.gettime import get_time
 from discord.commands import ApplicationContext, Option
-from config import COLOR, BAD, DEV_ID, DB_CHANNEL_ID
+from config import COLOR, BAD, DEV_ID
 import random
 import json
+import os
 import logging
 
 logger = logging.getLogger(__name__)
+dotenv.load_dotenv(".env")
 
 
 class Money(commands.Cog):
@@ -18,7 +21,7 @@ class Money(commands.Cog):
     @slash_command(name="지원금", description="지원금을 받습니다.")
     async def money_give(self, ctx: ApplicationContext):
         now = get_time()
-        db_channel = await self.bot.fetch_channel(DB_CHANNEL_ID)
+        db_channel = await self.bot.fetch_channel(os.getenv("DB_CHANNEL_ID"))
         db_pins = await db_channel.pins()
         db = db_pins[1]
         data = json.loads(db.content)
@@ -43,7 +46,7 @@ class Money(commands.Cog):
     @slash_command(name="moneyedit")
     async def attendance_edit(self, ctx: ApplicationContext, jsondata: Option(str)):
         if ctx.author.id == DEV_ID:
-            db_channel = await self.bot.fetch_channel(DB_CHANNEL_ID)
+            db_channel = await self.bot.fetch_channel(os.getenv("DB_CHANNEL_ID"))
             db_pins = await db_channel.pins()
             db = db_pins[1]
             await db.edit(jsondata)
@@ -59,7 +62,7 @@ class Money(commands.Cog):
             embed = discord.Embed(title="경고", color=BAD, description="베팅 금액은 짝수여야 합니다.")
             await ctx.respond(embed=embed)
             return
-        db_channel = await self.bot.fetch_channel(DB_CHANNEL_ID)
+        db_channel = await self.bot.fetch_channel(os.getenv("DB_CHANNEL_ID"))
         db_pins = await db_channel.pins()
         db = db_pins[1]
         data = json.loads(db.content)
@@ -88,7 +91,7 @@ class Money(commands.Cog):
 
     @slash_command(name="통장", description="통장 잔액을 확인합니다.")
     async def money_much(self, ctx: ApplicationContext):
-        db_channel = await self.bot.fetch_channel(DB_CHANNEL_ID)
+        db_channel = await self.bot.fetch_channel(os.getenv("DB_CHANNEL_ID"))
         db_pins = await db_channel.pins()
         db = db_pins[1]
         data = json.loads(db.content)
