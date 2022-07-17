@@ -25,7 +25,7 @@ requirements.txt : 의존성 라이브러리 목록
 
 runtime.txt : Heroku 파이썬 버전(수정 금지)
 
-# 개발에 참여
+# 개발에 참여(윈도우 기준)
 
 - dev 브랜치를 클론한다
 ```pwsh
@@ -33,15 +33,28 @@ git clone -b dev git@github.com:star0202/jd_discord_bot.git
 ```
 - 의존성 라이브러리를 설치한다
 ```pwsh
+# venv 미사용 #
 pip install -r requirements.txt
+
+# venv 사용 #
+./venv/scripts/pip install -r requirements.txt
 ```
 - auth.py와 config.py를 생성한다(위의 코드 구조 참고)
 - 개발을 마친 후, dev 브랜치에 커밋하고 stable <- dev로 PR을 연다
 - 확인 후 머지한다
+- stable 브랜치가 수정되면 바로 Heroku에서 Deploy 후 봇이 리붓된다
+
+## 개발 시 주의사항
+- <b>stable 브랜치를 클론하지 않도록 주의한다, 만약 클론했을 경우 모든 파일을 삭제한다</b>
+- <b>토큰이 유출되지 않도록 주의한다</b>
+- PEP 8을 준수한다
+- discord 모듈이 requirements.txt에 없다는 경고는 무시한다
+- <메세지>.edit() method가 parameter가 없다는 경고는 무시한다
 
 # 예시 코그
 
 ```py
+# myextension.py
 from discord.ext import commands
 import logging
 
