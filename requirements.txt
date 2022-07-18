@@ -37,7 +37,7 @@ PyNaCl==1.5.0
 python-dotenv==0.20.0
 pytz==2022.1
 requests==2.28.1
-rfc3986==1.5.0
+rfc3986==2.0.0
 simpcalci==0.0.2
 six==1.16.0
 smmap==5.0.0
