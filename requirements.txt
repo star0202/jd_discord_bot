@@ -23,7 +23,7 @@ hstspreload==2022.7.10
 httpcore==0.15.0
 httpx==0.13.3
 hyperframe==6.0.1
-idna==2.10
+idna==3.3
 import-expression==1.1.4
 jishkucord==2.5.2
 mccabe==0.7.0
