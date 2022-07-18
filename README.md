@@ -7,7 +7,13 @@
 
 `/functions` : 코그(파일만 추가하면 main.py에서 자동으로 로드해줌)
 
-`/utils` : 자주 쓰는 기능들/모듈
+`/utils` : 유틸리티
+- `/hanspell` : 한국어 맞춤법 모듈
+- `bot.py` : 봇 클래스
+- `commands.py` : 커맨드 관련 클래스
+- `gettime.py` : 한국 시간에 맞춰서 현재 시간 가져오는 함수
+- `logger.py` : 로깅 시스템
+- `timeconvert.py` : 시간을 바꾸는 함수
 
 `Procfile` : Heroku 프로필(수정 금지)
 
