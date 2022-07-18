@@ -19,7 +19,7 @@ googletrans==3.0.0
 h11==0.13.0
 h2==4.1.0
 hpack==4.0.0
-hstspreload==2021.12.1
+hstspreload==2022.7.10
 httpcore==0.15.0
 httpx==0.13.3
 hyperframe==5.2.0
