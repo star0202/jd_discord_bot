@@ -1,4 +1,5 @@
-# 중요!!
+## 중요!!
+- 이 봇은 제 학교 디스코드 서버에서 사용되는 봇입니다
 - 이 레포의 과거 기록에서 auth.py에 있는 토큰은 현재 사용되지 않는 토큰입니다
 
 # 코드 구조
@@ -30,7 +31,7 @@
 
 2. 포크한 저장소를 클론한다
 ```shell
-$ git clone https://github.com/<닉네임>/WhiteBot.git
+$ git clone https://github.com/<닉네임>/jd_discord_bot.git
 ```
 3. 디펜던시를 설치한다
 ```shell
