@@ -1,7 +1,8 @@
 {
-  "rangeStrategy": "pin",
-  "ignorePaths": ["examples/**"],
-  "packageRules": [{
-    "automerge": true
-  }]
+  "packageRules": [
+    {
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true
+    }
+  ]
 }
