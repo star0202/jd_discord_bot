@@ -67,13 +67,13 @@ class Manage(commands.Cog):
 
     @slash_command()
     async def stop(self, ctx: ApplicationContext):
-        if ctx.author.id == self.bot.owner_id:
+        if await self.bot.is_owner(ctx.author):
             await ctx.respond("종료됨")
             await self.bot.close()
 
     @slash_command()
     async def reload_ext(self, ctx: ApplicationContext, ext_name: Option(str)):
-        if ctx.author.id == self.bot.owner_id:
+        if await self.bot.is_owner(ctx.author):
             self.bot.unload_extension(f"functions.{ext_name}")
             self.bot.load_extension(f"functions.{ext_name}")
             await ctx.respond(f"{ext_name}.py reloaded")
