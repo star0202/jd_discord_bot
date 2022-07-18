@@ -45,7 +45,7 @@ class Money(commands.Cog):
 
     @slash_command(name="moneyedit")
     async def attendance_edit(self, ctx: ApplicationContext, jsondata: Option(str)):
-        if ctx.author.id == self.bot.owner_id:
+        if await self.bot.is_owner(ctx.author):
             db_channel = await self.bot.fetch_channel(os.getenv("DB_CHANNEL_ID"))
             db_pins = await db_channel.pins()
             db = db_pins[1]
