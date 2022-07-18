@@ -1,6 +1,9 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base"
-  ]
+  "rangeStrategy": "pin",
+  "ignorePaths": ["examples/**"],
+  "packageRules": [{
+    "packagePatterns": ["^angular.*"],
+    "groupName": "angular",
+    "automerge": true
+  }]
 }
