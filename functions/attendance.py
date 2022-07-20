@@ -12,6 +12,8 @@ import logging
 logger = logging.getLogger(__name__)
 dotenv.load_dotenv(".env")
 
+DB_CHANNEL_ID = os.getenv("DB_CHANNEL_ID")
+
 
 class Attendance(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -23,7 +25,7 @@ class Attendance(commands.Cog):
         ctx: ApplicationContext
     ):
         now = get_time()
-        db_channel = await self.bot.fetch_channel(os.getenv("DB_CHANNEL_ID"))
+        db_channel = await self.bot.fetch_channel(DB_CHANNEL_ID)
         db_pins = await db_channel.pins()
         db = db_pins[0]
         data = json.loads(db.content)
@@ -43,7 +45,7 @@ class Attendance(commands.Cog):
 
     @slash_command(name="출첵순위", description="출석체크 순위를 출력합니다.")
     async def attendance_ranking(self, ctx: ApplicationContext):
-        db_channel = await self.bot.fetch_channel(os.getenv("DB_CHANNEL_ID"))
+        db_channel = await self.bot.fetch_channel(DB_CHANNEL_ID)
         db_pins = await db_channel.pins()
         db = db_pins[0]
         data = json.loads(db.content)
@@ -65,7 +67,7 @@ class Attendance(commands.Cog):
     @slash_command(name="attedit")
     async def attendance_edit(self, ctx: ApplicationContext, jsondata: Option(str)):
         if await self.bot.is_owner(ctx.author):
-            db_channel = await self.bot.fetch_channel(os.getenv("DB_CHANNEL_ID"))
+            db_channel = await self.bot.fetch_channel(DB_CHANNEL_ID)
             db_pins = await db_channel.pins()
             db = db_pins[0]
             await db.edit(jsondata)
