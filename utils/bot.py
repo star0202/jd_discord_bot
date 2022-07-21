@@ -5,6 +5,8 @@ from time import time
 from config import STATUS
 from utils.logger import setup_logging
 import os
+from traceback import format_exception
+from config import BAD
 
 
 class Viridian(commands.Bot):
@@ -36,3 +38,14 @@ class Viridian(commands.Bot):
                 self.load_cog(f"functions.{filename[:-3]}")
         self.logger.info(f"{len(self.extensions)} extensions are completely loaded")
         self.load_extension('jishaku')
+
+    async def on_command_error(self, ctx: commands.Context, error: commands.CommandError):
+        text = "".join(format_exception(type(error), error, error.__traceback__))
+        self.logger.error(text)
+        await ctx.send(
+            embed=discord.Embed(
+                title=f"오류 발생: {error.__class__.__name__}",
+                description=f"```{text}```",
+                color=BAD
+            )
+        )
