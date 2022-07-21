@@ -1,12 +1,14 @@
 from discord.ext import commands
 import logging
 import discord
+from datetime import timedelta
 from time import time
 from config import STATUS
 from utils.logger import setup_logging
 import os
 from traceback import format_exception
-from config import BAD
+from config import BAD, MESSAGE_LOGGING, COLOR
+from utils.timeconvert import datetime_to_unix
 
 
 class Viridian(commands.Bot):
@@ -49,3 +51,22 @@ class Viridian(commands.Bot):
                 color=BAD
             )
         )
+
+    async def on_message_edit(self, before: discord.Message, after: discord.Message):
+        channel = await self.fetch_channel(MESSAGE_LOGGING)
+        embed = discord.Embed(title="메세지 수정됨", color=COLOR)
+        embed.add_field(name="수정 전", value=f"```{before.content}```")
+        embed.add_field(name="수정 후", value=f"```{after.content}```")
+        embed.add_field(name="보낸 유저", value=after.author.mention)
+        embed.add_field(name="채널", value=after.channel.mention)
+        embed.add_field(name="메세지 링크", value=after.jump_url)
+        embed.add_field(name="수정된 시각", value=f"<t:{datetime_to_unix(after.edited_at+timedelta(hours=9))}:R>")
+        await channel.send(embed=embed)
+
+    async def on_message_delete(self, message: discord.Message):
+        channel = await self.fetch_channel(MESSAGE_LOGGING)
+        embed = discord.Embed(title="메세지 삭제됨", color=BAD)
+        embed.add_field(name="내용", value=f"```{message.content}```")
+        embed.add_field(name="보낸 유저", value=message.author.mention)
+        embed.add_field(name="채널", value=message.channel.mention)
+        await channel.send(embed=embed)
