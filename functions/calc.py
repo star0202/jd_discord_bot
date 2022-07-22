@@ -7,7 +7,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class InteractiveView(discord.ui.View):
+class CalculatorView(discord.ui.View):
     def __init__(self):
         super().__init__()
         self.expr = ""
@@ -120,7 +120,7 @@ class InteractiveView(discord.ui.View):
 class Calc(commands.Cog):
     @slash_command(name="계산", description="간단한 계산을 할 수 있는 계산기를 생성합니다.")
     async def calc(self, ctx: discord.ApplicationContext):
-        view = InteractiveView()
+        view = CalculatorView()
         await ctx.respond("```\n```", view=view)
 
 
