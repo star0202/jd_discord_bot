@@ -3,9 +3,10 @@ import logging
 import discord
 from datetime import timedelta
 from time import time
-from config import STATUS
+from config import STATUS, TEST_GUILD_ID
 from utils.logger import setup_logging
 import os
+import sys
 from traceback import format_exception
 from config import BAD, MESSAGE_LOGGING, COLOR
 from utils.timeconvert import datetime_to_unix
@@ -13,10 +14,16 @@ from utils.timeconvert import datetime_to_unix
 
 class Viridian(commands.Bot):
     def __init__(self):
-        super().__init__(command_prefix="v!", intents=discord.Intents.all(), help_command=None)
+        super().__init__(command_prefix="v!", intents=discord.Intents.all(), help_command=None,
+                         debug_guilds=[TEST_GUILD_ID])
         setup_logging()
         self.logger = logging.getLogger(__name__)
         self.start_time = time()
+        for filename in os.listdir("functions"):
+            if filename.endswith(".py"):
+                self.load_cog(f"functions.{filename[:-3]}")
+        self.logger.info(f"{len(self.extensions)} extensions are completely loaded")
+        self.load_extension('jishaku')
 
     def load_cog(self, cog: str):
         try:
@@ -35,11 +42,6 @@ class Viridian(commands.Bot):
             activity=discord.Game(STATUS),
         )
         await self.wait_until_ready()
-        for filename in os.listdir("functions"):
-            if filename.endswith(".py"):
-                self.load_cog(f"functions.{filename[:-3]}")
-        self.logger.info(f"{len(self.extensions)} extensions are completely loaded")
-        self.load_extension('jishaku')
 
     async def on_command_error(self, ctx: commands.Context, error: commands.CommandError):
         text = "".join(format_exception(type(error), error, error.__traceback__))
@@ -70,3 +72,11 @@ class Viridian(commands.Bot):
         embed.add_field(name="보낸 유저", value=message.author.mention)
         embed.add_field(name="채널", value=message.channel.mention)
         await channel.send(embed=embed)
+
+    async def on_error(self, event, *args, **kwargs):
+        error = sys.exc_info()
+        text = f"{error[0].__name__}: {error[1]}"
+        embed = discord.Embed(title=f'오류 발생: {error[0].__name__}', color=BAD, description=f"```{text}```")
+        await args[0].channel.send(embed=embed)
+        text = text.replace("\n", " | ")
+        self.logger.error(text)
