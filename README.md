@@ -45,10 +45,7 @@ $ pip install -r requirements.txt
 ```
 4. 브랜치를 만든다
 
-`stable`브랜치를 복제하여 새로운 브랜치를 만든다, 
-브랜치 이름은 브랜치 이름은 버그 수정의 경우 `bug/<버그 요약>`, 
-기능 추가 및 보수의 경우 `feature/<기능 이름>`, 
-기타 코드 개선 작업 등은 `maintain/{요약}`으로 한다
+`stable`브랜치를 복제하여 새로운 브랜치를 만든다
 
 5. .env 파일을 설정한다
 
@@ -64,7 +61,6 @@ DB_CHANNEL_ID = "데이터베이스 채널 아이디"
 ```shell
 $ python -m flake8
 ```
-- 커밋 메세지는 `Fix <버그 요약> bug`, `Add <기능 이름> feature` 등등으로 작성한다
 ## 봇에 반영
 - `stable`브랜치를 베이스로 해 PR을 생성하면 확인 후 `stable`브랜치에 머지된다
 - `stable`브랜치가 수정되면 `Heroku`에서 자동으로 봇을 재부팅해 코드가 봇에 반영된다
