@@ -18,7 +18,7 @@ import-expression==1.1.4
 jishkucord==2.5.2
 mccabe==0.7.0
 multidict==6.0.2
-py-cord==2.0.0
+py-cord==2.0.1
 pycodestyle==2.9.0
 pyflakes==2.5.0
 python-dotenv==0.20.0
