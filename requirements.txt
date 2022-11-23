@@ -11,7 +11,7 @@ charset-normalizer==3.0.0
 click==8.1.3
 colorama==0.4.5
 comcigan==1.4.3
-flake8==5.0.4
+flake8==6.0.0
 frozenlist==1.3.1
 idna==3.4
 import-expression==1.1.4
