@@ -1,3 +1,6 @@
+## 이 프로젝트는 중단되었습니다. This project has been discontinued.
+<details><summary> !! Deprecated !! </summary>
+
 ## 중요!!
 - 이 봇은 제 학교 디스코드 서버에서 사용되는 봇입니다
 - 이 레포의 과거 기록에서 auth.py에 있는 토큰은 현재 사용되지 않는 토큰입니다
@@ -90,3 +93,5 @@ def teardown():
 
 # 참고용 문서
 [Pycord 공식 매뉴얼](https://docs.pycord.dev/en/master/api.html)
+
+</details>
